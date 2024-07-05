@@ -7,7 +7,7 @@
     3. Insert from the head (the first node is called head)
     4. Traversing or printing the nodes
     5. Insert from tail(append)
-    6. Insert from the middle
+    6. Insert value to a given position
     7. Delete from head
     8. Delete from tail (pop)
     9. Delete by value (remove)
@@ -48,8 +48,39 @@ class linkedList:
         
         return result[:-2]
 
+    # 5.Insert from tail(append)
+    def append_at_end(self,value):
+        newNode = node(value)       # create the new node
+        if self.head == None:       # what if the list is empty
+            self.head = newNode
+            self.n = self.n + 1
+            return
+        
+        current = self.head
+        while current.next != None:
+            current = current.next
+        
+        current.next = newNode
+        self.n = self.n + 1
 
+    # 6.Insert value to a given position
+    def insert_into_position(self,position,value):
+        newNode = node(value)
+        current = self.head
 
+        while current != None:      # loop to find the specified position
+            if current.data == position:
+                break
+            current = current.next
+        
+        # Case 1: when item found
+        if current != None:
+            newNode.next = current.next
+            current.next = newNode
+            self.n = self.n + 1
+        # Case 2: when item not found
+        else:
+            print("Item not found") 
 
 # create object of the linked list class
 L = linkedList()
@@ -66,3 +97,10 @@ print(L)
 print(len(L))       # linked list updated
 
 print(L)            # display of the linked list items
+
+L.append_at_end(6)  # inserting node at the end
+print(L)
+
+L.insert_into_position(4,400)       # insert 400 after 4 in the list
+print(L)
+L.insert_into_position(600,2)       # item not found in the list
