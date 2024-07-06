@@ -8,12 +8,12 @@
     4. Traversing or printing the nodes
     5. Insert from tail(append)
     6. Insert value to a given position
-    7. Delete from head
-    8. Delete from tail (pop)
-    9. Delete by value (remove)
-    10. Search by value 
-    11. Delete by index 
-    12. Search by index
+    7. Clear the linked list
+    8. Delete from head
+    9. Delete from tail (pop)
+    10. Delete by value (remove)
+    11. Search by value 
+    
 '''
 # 1. Creating node class and a linked list class
 class node:
@@ -81,6 +81,75 @@ class linkedList:
         # Case 2: when item not found
         else:
             print("Item not found") 
+    
+    # 7.Clear the linked list
+    def clear(self):
+        self.head = None
+        self.n = 0
+    
+    # 8.Delete from head
+    def delete_head(self):
+        if self.head == None:
+            print("Empty Linked list")
+        else:
+            self.head = self.head.next
+            self.n = self.n -1 
+    
+    # 9.Delete from tail (pop)
+    def delete_tail(self):
+        # if the linked list is already empty
+        if self.head == None:
+            return "Empty linked list"
+        # if the linked list is not empty
+        current = self.head
+
+        # when there is one item in the linked list
+        if current.next == None:
+            self.delete_head()
+
+        while current.next.next != None:
+            current = current.next
+
+        # here current is 2nd last node
+        current.next = None
+        self.n = self.n - 1
+    
+    # 10.Delete by value (remove)
+    def delete_by_value(self,value):
+        # if linked list is empty
+        if self.head == None:
+            print("Empty linked list")
+
+        # if the value to be deleted is the head value
+        if self.head.data == value:
+            return self.delete_head()
+        
+        current = self.head
+        while current.next != None:
+            if current.next.data == value:  # it will be one node previous than the desire
+                break
+            current = current.next
+        
+        if current.next == None:
+            print("Item not found")
+        else:
+            current.next = current.next.next    # it will disable the connection between the desire value and prev node
+            self.n = self.n - 1
+    
+    # 11.Search by value 
+    def search_by_value(self,value):
+        current = self.head
+        pos = 0
+
+        while current != None:
+            if current.data == value:
+                print(f"Value found at position: {pos}")
+                return pos
+            current = current.next
+            pos = pos + 1
+        
+        print("404:Not found")
+        
 
 # create object of the linked list class
 L = linkedList()
@@ -104,3 +173,15 @@ print(L)
 L.insert_into_position(4,400)       # insert 400 after 4 in the list
 print(L)
 L.insert_into_position(600,2)       # item not found in the list
+
+#L.delete_head()     # head will be deleted
+#print(L)
+
+#L.delete_tail()     # item from last will be deleted
+#print(L)
+
+#L.delete_by_value(400)
+#print(L)
+
+L.search_by_value(400)      # search the value 400 in the linked list
+L.search_by_value(800)      # the item is not in the linked list
