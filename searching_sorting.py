@@ -28,4 +28,4 @@ def binary_search(arr,low,high,item):
         return -1
 
 arr = [1,2,3,4,5,150,250,350,400,500,600,750,800]
-print(binary_search(arr,0,len(arr),250))
+print(binary_search(arr,0,len(arr)-1,250))
